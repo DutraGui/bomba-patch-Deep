@@ -714,6 +714,18 @@
             font-weight: bold;
         }
         
+        /* LOWFY BADGE */
+        .lowfy-badge {
+            background: #000;
+            color: #FFD700;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 10px 0;
+            border: 2px solid #FFD700;
+            font-weight: bold;
+        }
+        
         /* RESPONSIVE */
         @media (max-width: 480px) {
             .hero-title { font-size: 24px; }
@@ -824,7 +836,7 @@
                 <div class="benefit-card">
                     <span class="benefit-icon">📱</span>
                     <span class="benefit-text">RODA EM TUDO</span>
-                    <span class="benefit-desc">2GB RAM. Testado em 100+ modelos.</span>
+                    <span class="benefit-desc">2GB RAM. Testado em 100+ modelos.</</span>
                 </div>
                 <div class="benefit-card">
                     <span class="benefit-icon">🔒</span>
@@ -923,8 +935,8 @@
             </div>
             <div class="timer" id="mainTimer">29:47</div>
             
-            <!-- BOTÃO DE COMPRA COM REDIRECIONAMENTO DIRETO -->
-            <a href="https://lastlink.com/p/CBD433C1F/checkout-payment/" class="cta-button" onclick="trackConversion()">
+            <!-- BOTÃO DE COMPRA COM REDIRECIONAMENTO LOWFY -->
+            <a href="https://pay.lowify.com.br/checkout?product_id=KvqSd6" class="cta-button" onclick="trackConversion()">
                 🚨 SIM! QUERO MEU BOMBA PATCH 2026 AGORA! 🚨
             </a>
             
@@ -945,9 +957,10 @@
             </p>
         </div>
 
-        <!-- MÉTODOS DE PAGAMENTO -->
+        <!-- MÉTODOS DE PAGAMENTO - ATUALIZADO LOWFY -->
         <div class="payment-section">
-            <div class="payment-title">💳 ACEITAMOS TODAS AS FORMAS DE PAGAMENTO 💳</div>
+            <div class="payment-title">💳 PAGUE COM LOWFY - 100% SEGURO 💳</div>
+            <div class="lowfy-badge">🚀 PROCESSADO POR LOWFY 🚀</div>
             <div class="payment-icons">
                 <span>💳</span>
                 <span>📱</span>
@@ -959,6 +972,9 @@
             <div class="payment-subtitle">
                 🔒 COMPRA 100% SEGURA - CERTIFICADO SSL 🔒
             </div>
+            <p style="color: #FFD700; margin-top: 10px; font-size: 14px;">
+                Aceitamos cartão, PIX, boleto e criptomoedas via Lowfy
+            </p>
         </div>
 
         <!-- FAQ -->
@@ -993,7 +1009,7 @@
                     <span>+</span>
                 </div>
                 <div class="faq-answer">
-                    100% SEGURO! APK verificado por 3 antivírus diferentes. Pagamento processado pela Lastlink (plataforma CERTIFICADA). Zero risco de vírus, zero risco de golpe.
+                    100% SEGURO! APK verificado por 3 antivírus diferentes. Pagamento processado pela Lowfy (plataforma CERTIFICADA). Zero risco de vírus, zero risco de golpe.
                 </div>
             </div>
             
@@ -1006,10 +1022,20 @@
                     Porque as versões "grátis": 1) TRAVAM 2) NÃO TÊM ONLINE 3) ESTÃO DESATUALIZADAS 4) TÊM VÍRUS. Você já perdeu QUANTAS HORAS? R$9,90 é MENOS que um combo do MC. É o preço da sua PAZ DE ESPÍRITO.
                 </div>
             </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    COMO RECEBO O JOGO APÓS PAGAR?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    IMEDIATAMENTE! Após a confirmação do pagamento (PIX é na hora, cartão leva segundos), você será redirecionado para a página de download com o APK e instruções. Também enviaremos tudo por e-mail.
+                </div>
+            </div>
         </div>
 
         <!-- SEGUNDO CTA - AGRESSIVO -->
-        <a href="https://lastlink.com/p/CBD433C1F/checkout-payment/" class="cta-button" onclick="trackConversion()">
+        <a href="https://pay.lowify.com.br/checkout?product_id=KvqSd6" class="cta-button" onclick="trackConversion()">
             ⚡ NÃO PERCA! ÚLTIMAS UNIDADES! COMPRAR AGORA! ⚡
         </a>
 
@@ -1040,7 +1066,7 @@
             <div style="margin-top: 25px; font-size: 12px; color: #666;">
                 © 2024 Bomba Patch 2026 Mobile. Produto oficial desenvolvido por fãs para fãs.<br>
                 Não somos afiliados à Konami, EA Sports, ou qualquer desenvolvedor oficial.<br>
-                Pagamentos processados com segurança via Lastlink.
+                Pagamentos processados com segurança via <strong style="color: #FFD700;">Lowfy</strong>.
             </div>
         </div>
     </div>
@@ -1102,7 +1128,7 @@
             }
         }
         
-        // TRACKING DE CONVERSÃO - LINK ATUALIZADO
+        // TRACKING DE CONVERSÃO - ATUALIZADO LOWFY
         function trackConversion() {
             if (typeof utms !== 'undefined') {
                 utms.track('purchase_click', {
@@ -1110,7 +1136,7 @@
                     price: 9.90,
                     currency: 'BRL',
                     page: 'landing_page_v6',
-                    checkout: 'lastlink'
+                    gateway: 'lowfy'
                 });
             }
             
@@ -1118,11 +1144,11 @@
             if (event && event.target) {
                 event.target.style.transform = 'scale(0.95)';
                 event.target.style.background = 'linear-gradient(135deg, #00AA00, #00FF00)';
-                event.target.innerHTML = '🚀🚀 REDIRECIONANDO... 🚀🚀';
+                event.target.innerHTML = '🚀🚀 REDIRECIONANDO PARA PAGAMENTO... 🚀🚀';
                 
                 // Pequeno delay para mostrar efeito
                 setTimeout(() => {
-                    console.log('Redirecionando para: https://lastlink.com/p/CBD433C1F/checkout-payment/');
+                    console.log('Redirecionando para checkout Lowfy');
                 }, 200);
             }
         }
