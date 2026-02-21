@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>BOMBA PATCH 2026 MOBILE - FUNCIONA NO CELULAR</title>
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17962698816"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17962698816');
+    </script>
+    
     <!-- UTMify Tracking Script -->
     <script
         src="https://cdn.utmify.com.br/scripts/utms/latest.js"
@@ -12,6 +21,7 @@
         data-utmify-prevent-subids
         async
         defer
+        
     ></script>
     
     <meta name="description" content="Bomba Patch 2026 Mobile - Patch completo para Android. Times atualizados 2026, online funcional, controles touch. Instalação rápida!">
@@ -763,6 +773,14 @@
         
         // TRACKING
         function trackConversion() {
+            // Google Ads Tracking
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17962698816',
+                'value': 9.90,
+                'currency': 'BRL',
+                'transaction_id': ''
+            });
+            
             if (typeof utms !== 'undefined') {
                 utms.track('purchase_click', {
                     product: 'bomba_patch_2026_mobile',
