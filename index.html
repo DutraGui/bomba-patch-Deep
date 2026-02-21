@@ -773,12 +773,13 @@
         
         // TRACKING
         function trackConversion() {
-            // Google Ads Tracking
+            // Evento de conversão específico do Google Ads
             gtag('event', 'conversion', {
-                'send_to': 'AW-17962698816',
+                'send_to': 'AW-17962698816/9PkYCM_S0PwbEMCQpPVC',
                 'value': 9.90,
                 'currency': 'BRL',
                 'transaction_id': ''
+                // 'new_customer': true /* calculate dynamically, populate with true/false */,
             });
             
             if (typeof utms !== 'undefined') {
