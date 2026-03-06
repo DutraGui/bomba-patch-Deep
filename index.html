@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>BOMBA PATCH 2026 MOBILE - FUNCIONA NO CELULAR</title>
     
-    <!-- Google tag (gtag.js) -->
+    <!-- Preloads e otimizações de performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://cdn.utmify.com.br">
+    <link rel="preconnect" href="https://player.vimeo.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://cdn.utmify.com.br">
+    <link rel="dns-prefetch" href="https://player.vimeo.com">
+    
+    <!-- Google tag (gtag.js) - Carregamento assíncrono -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17962698816"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,14 +22,13 @@
       gtag('config', 'AW-17962698816');
     </script>
     
-    <!-- UTMify Tracking Script -->
+    <!-- UTMify Tracking Script - Defer para não bloquear renderização -->
     <script
         src="https://cdn.utmify.com.br/scripts/utms/latest.js"
         data-utmify-prevent-xcod-sck
         data-utmify-prevent-subids
         async
         defer
-        
     ></script>
     
     <meta name="description" content="Bomba Patch 2026 Mobile - Patch completo para Android. Times atualizados 2026, online funcional, controles touch. Instalação rápida!">
@@ -35,510 +42,8 @@
     <meta property="og:image" content="https://i.imgur.com/OGbZFqW.png">
     
     <style>
-        /* RESET TOTAL */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #000000;
-            color: #FFFFFF;
-            line-height: 1.4;
-            overflow-x: hidden;
-            width: 100%;
-        }
-        
-        /* BANNER TOPO - SIMPLES */
-        .top-banner {
-            background: #FF0000;
-            color: white;
-            text-align: center;
-            padding: 10px 8px;
-            font-size: 14px;
-            font-weight: bold;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            border-bottom: 2px solid #FFD700;
-        }
-        
-        /* VÍDEO SEM OVERLAY */
-        .video-container {
-            width: 100%;
-            margin-top: 45px;
-            background: #000;
-        }
-        
-        .video-wrapper {
-            width: 100%;
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            background: #000;
-        }
-        
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-        
-        /* TÍTULOS ABAIXO DO VÍDEO */
-        .headline {
-            text-align: center;
-            padding: 20px 15px 10px;
-        }
-        
-        .headline h1 {
-            font-size: 24px;
-            color: #FFD700;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        
-        .headline p {
-            font-size: 18px;
-            color: #FFFFFF;
-            font-weight: bold;
-        }
-        
-        /* CONTAINER */
-        .container {
-            width: 100%;
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* SEÇÃO DOR */
-        .pain-section {
-            background: #8B0000;
-            padding: 25px 18px;
-            margin: 20px 0;
-            border-left: 6px solid #FFD700;
-            border-radius: 0 10px 10px 0;
-        }
-        
-        .pain-section h3 {
-            color: #FFD700;
-            font-size: 20px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-        
-        .pain-list {
-            list-style: none;
-        }
-        
-        .pain-list li {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
-            font-size: 16px;
-        }
-        
-        .pain-list li::before {
-            content: "✗";
-            position: absolute;
-            left: 0;
-            color: #FFD700;
-            font-size: 22px;
-            font-weight: bold;
-        }
-        
-        /* SOLUÇÃO */
-        .solution-section {
-            background: #006400;
-            padding: 30px 20px;
-            margin: 25px 0;
-            border-radius: 10px;
-            border: 3px solid #FFD700;
-            text-align: center;
-        }
-        
-        .solution-title {
-            font-size: 26px;
-            color: #FFFFFF;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-        
-        .solution-highlight {
-            font-size: 18px;
-            color: #FFD700;
-            font-weight: bold;
-            margin: 15px 0;
-            line-height: 1.4;
-        }
-        
-        /* BENEFÍCIOS - GRID SIMPLES */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 25px 0;
-        }
-        
-        .benefit-card {
-            background: #111;
-            border: 2px solid #FFD700;
-            border-radius: 10px;
-            padding: 20px 8px;
-            text-align: center;
-        }
-        
-        .benefit-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        .benefit-text {
-            font-size: 14px;
-            font-weight: bold;
-            color: #FFD700;
-        }
-        
-        /* COMPARAÇÃO */
-        .comparison-section {
-            margin: 30px 0;
-            padding: 20px 0;
-            border-top: 3px dashed #FF0000;
-            border-bottom: 3px dashed #FF0000;
-        }
-        
-        .comparison-row {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .comparison-item {
-            flex: 1;
-            background: #111;
-            padding: 15px 10px;
-            border-radius: 8px;
-        }
-        
-        .badge-bad {
-            background: #FF0000;
-            color: white;
-            padding: 8px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 13px;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        
-        .badge-good {
-            background: #008000;
-            color: white;
-            padding: 8px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 13px;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        
-        .comparison-list {
-            list-style: none;
-        }
-        
-        .comparison-list li {
-            margin-bottom: 8px;
-            padding-left: 22px;
-            position: relative;
-            font-size: 13px;
-        }
-        
-        .comparison-list.bad li::before {
-            content: "✗";
-            color: #FF0000;
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        
-        .comparison-list.good li::before {
-            content: "✓";
-            color: #00FF00;
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        
-        /* TESTIMONIALS */
-        .testimonial-card {
-            background: #111;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 5px solid #FFD700;
-        }
-        
-        .testimonial-text {
-            font-size: 15px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            padding-top: 10px;
-            border-top: 2px solid #FFD700;
-        }
-        
-        .author-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: #FFD700;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #000;
-        }
-        
-        .author-name {
-            font-weight: bold;
-            font-size: 16px;
-        }
-        
-        .author-badge {
-            background: #008000;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            display: inline-block;
-            margin-top: 3px;
-        }
-        
-        /* CONTADOR */
-        .stock-counter {
-            background: #FF0000;
-            color: white;
-            text-align: center;
-            padding: 20px 15px;
-            margin: 25px 0;
-            border-radius: 10px;
-            border: 3px solid #FFD700;
-        }
-        
-        .stock-number {
-            font-size: 52px;
-            margin: 10px 0;
-            color: #FFD700;
-            font-weight: 900;
-        }
-        
-        /* PREÇO */
-        .pricing-section {
-            background: #111;
-            border-radius: 15px;
-            padding: 30px 20px;
-            margin: 25px 0;
-            border: 4px solid #FF0000;
-            text-align: center;
-            position: relative;
-        }
-        
-        .pricing-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #FF0000;
-            color: white;
-            padding: 8px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 16px;
-            border: 2px solid #FFD700;
-            white-space: nowrap;
-        }
-        
-        .old-price {
-            font-size: 20px;
-            color: #999;
-            text-decoration: line-through;
-            margin-top: 10px;
-        }
-        
-        .new-price {
-            font-size: 58px;
-            color: #FFD700;
-            font-weight: 900;
-            margin: 10px 0;
-            line-height: 1;
-        }
-        
-        .timer {
-            font-size: 32px;
-            color: #FF0000;
-            font-weight: 900;
-            margin: 15px 0;
-            font-family: monospace;
-            background: #000;
-            padding: 8px;
-            border-radius: 8px;
-            border: 2px solid #FFD700;
-        }
-        
-        /* BOTÃO CTA */
-        .cta-button {
-            display: block;
-            width: 100%;
-            background: #FF0000;
-            color: white;
-            text-align: center;
-            padding: 22px 15px;
-            font-size: 22px;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 50px;
-            margin: 25px 0;
-            border: 3px solid #FFD700;
-            box-shadow: 0 8px 0 #8B0000;
-            letter-spacing: 1px;
-        }
-        
-        .cta-button:active {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0 #8B0000;
-        }
-        
-        /* GARANTIA */
-        .guarantee-section {
-            background: #FFD700;
-            color: #000;
-            border-radius: 10px;
-            padding: 25px 20px;
-            margin: 25px 0;
-            text-align: center;
-            border: 3px solid #000;
-        }
-        
-        /* PAGAMENTO */
-        .payment-section {
-            background: #111;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 25px 0;
-            text-align: center;
-            border: 2px solid #FFD700;
-        }
-        
-        .payment-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-            font-size: 32px;
-            flex-wrap: wrap;
-        }
-        
-        .lowfy-badge {
-            background: #000;
-            color: #FFD700;
-            padding: 8px 20px;
-            border-radius: 25px;
-            display: inline-block;
-            margin: 10px 0;
-            border: 2px solid #FFD700;
-            font-weight: bold;
-        }
-        
-        /* FAQ */
-        .faq-item {
-            background: #111;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            border-left: 5px solid #FFD700;
-        }
-        
-        .faq-question {
-            padding: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .faq-answer {
-            padding: 0 18px 18px;
-            display: none;
-            color: #CCC;
-        }
-        
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-        
-        /* AVISO FINAL */
-        .final-warning {
-            background: #000;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-            margin: 30px 0;
-            border-top: 5px solid #FF0000;
-            border-bottom: 5px solid #FF0000;
-        }
-        
-        /* FOOTER */
-        .footer {
-            text-align: center;
-            padding: 25px 15px;
-            border-top: 3px solid #FF0000;
-            font-size: 12px;
-            color: #666;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: #CCC;
-            text-decoration: none;
-        }
-        
-        /* TÍTULOS DE SEÇÃO */
-        .section-title {
-            font-size: 24px;
-            color: #FFD700;
-            text-align: center;
-            margin: 25px 0 15px;
-            text-transform: uppercase;
-        }
-        
-        /* RESPONSIVO */
-        @media (max-width: 380px) {
-            .new-price { font-size: 48px; }
-            .cta-button { font-size: 18px; padding: 18px; }
-            .headline h1 { font-size: 22px; }
-        }
+        /* RESET TOTAL - MINIFICADO */
+        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#000;color:#FFF;line-height:1.4;overflow-x:hidden;width:100%}.top-banner{background:#F00;color:#fff;text-align:center;padding:10px 8px;font-size:14px;font-weight:700;position:fixed;top:0;width:100%;z-index:1000;border-bottom:2px solid #FFD700}.video-container{width:100%;margin-top:45px;background:#000}.video-wrapper{width:100%;position:relative;padding-bottom:56.25%;background:#000}.video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block}.headline{text-align:center;padding:20px 15px 10px}.headline h1{font-size:24px;color:#FFD700;font-weight:900;text-transform:uppercase;margin-bottom:8px}.headline p{font-size:18px;color:#FFF;font-weight:700}.container{width:100%;max-width:480px;margin:0 auto;padding:0 15px}.pain-section{background:#8B0000;padding:25px 18px;margin:20px 0;border-left:6px solid #FFD700;border-radius:0 10px 10px 0}.pain-section h3{color:#FFD700;font-size:20px;margin-bottom:15px;text-transform:uppercase}.pain-list{list-style:none}.pain-list li{margin-bottom:15px;padding-left:30px;position:relative;font-size:16px}.pain-list li::before{content:"✗";position:absolute;left:0;color:#FFD700;font-size:22px;font-weight:700}.solution-section{background:#006400;padding:30px 20px;margin:25px 0;border-radius:10px;border:3px solid #FFD700;text-align:center}.solution-title{font-size:26px;color:#FFF;margin-bottom:15px;text-transform:uppercase}.solution-highlight{font-size:18px;color:#FFD700;font-weight:700;margin:15px 0;line-height:1.4}.benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:25px 0}.benefit-card{background:#111;border:2px solid #FFD700;border-radius:10px;padding:20px 8px;text-align:center}.benefit-icon{font-size:32px;margin-bottom:10px;display:block}.benefit-text{font-size:14px;font-weight:700;color:#FFD700}.comparison-section{margin:30px 0;padding:20px 0;border-top:3px dashed #F00;border-bottom:3px dashed #F00}.comparison-row{display:flex;gap:8px}.comparison-item{flex:1;background:#111;padding:15px 10px;border-radius:8px}.badge-bad{background:#F00;color:#fff;padding:8px;border-radius:5px;font-weight:700;font-size:13px;text-align:center;margin-bottom:12px}.badge-good{background:green;color:#fff;padding:8px;border-radius:5px;font-weight:700;font-size:13px;text-align:center;margin-bottom:12px}.comparison-list{list-style:none}.comparison-list li{margin-bottom:8px;padding-left:22px;position:relative;font-size:13px}.comparison-list.bad li::before{content:"✗";color:#F00;position:absolute;left:0;font-weight:700}.comparison-list.good li::before{content:"✓";color:#0F0;position:absolute;left:0;font-weight:700}.testimonial-card{background:#111;border-radius:10px;padding:20px;margin-bottom:15px;border-left:5px solid #FFD700}.testimonial-text{font-size:15px;line-height:1.5;margin-bottom:15px;font-style:italic}.testimonial-author{display:flex;align-items:center;padding-top:10px;border-top:2px solid #FFD700}.author-avatar{width:45px;height:45px;border-radius:50%;background:#FFD700;margin-right:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#000}.author-name{font-weight:700;font-size:16px}.author-badge{background:green;color:#fff;padding:2px 8px;border-radius:12px;font-size:11px;display:inline-block;margin-top:3px}.stock-counter{background:#F00;color:#fff;text-align:center;padding:20px 15px;margin:25px 0;border-radius:10px;border:3px solid #FFD700}.stock-number{font-size:52px;margin:10px 0;color:#FFD700;font-weight:900}.pricing-section{background:#111;border-radius:15px;padding:30px 20px;margin:25px 0;border:4px solid #F00;text-align:center;position:relative}.pricing-badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#F00;color:#fff;padding:8px 25px;border-radius:30px;font-weight:700;font-size:16px;border:2px solid #FFD700;white-space:nowrap}.old-price{font-size:20px;color:#999;text-decoration:line-through;margin-top:10px}.new-price{font-size:58px;color:#FFD700;font-weight:900;margin:10px 0;line-height:1}.timer{font-size:32px;color:#F00;font-weight:900;margin:15px 0;font-family:monospace;background:#000;padding:8px;border-radius:8px;border:2px solid #FFD700}.cta-button{display:block;width:100%;background:#F00;color:#fff;text-align:center;padding:22px 15px;font-size:22px;font-weight:900;text-transform:uppercase;text-decoration:none;border-radius:50px;margin:25px 0;border:3px solid #FFD700;box-shadow:0 8px 0 #8B0000;letter-spacing:1px}.cta-button:active{transform:translateY(4px);box-shadow:0 4px 0 #8B0000}.guarantee-section{background:#FFD700;color:#000;border-radius:10px;padding:25px 20px;margin:25px 0;text-align:center;border:3px solid #000}.payment-section{background:#111;border-radius:10px;padding:20px;margin:25px 0;text-align:center;border:2px solid #FFD700}.payment-icons{display:flex;justify-content:center;gap:15px;margin:15px 0;font-size:32px;flex-wrap:wrap}.lowfy-badge{background:#000;color:#FFD700;padding:8px 20px;border-radius:25px;display:inline-block;margin:10px 0;border:2px solid #FFD700;font-weight:700}.faq-item{background:#111;margin-bottom:12px;border-radius:8px;border-left:5px solid #FFD700}.faq-question{padding:18px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}.faq-answer{padding:0 18px 18px;display:none;color:#CCC}.faq-item.active .faq-answer{display:block}.final-warning{background:#000;color:#fff;text-align:center;padding:25px 15px;margin:30px 0;border-top:5px solid #F00;border-bottom:5px solid #F00}.footer{text-align:center;padding:25px 15px;border-top:3px solid #F00;font-size:12px;color:#666}.footer-links{display:flex;justify-content:center;gap:15px;margin:15px 0;flex-wrap:wrap}.footer-links a{color:#CCC;text-decoration:none}.section-title{font-size:24px;color:#FFD700;text-align:center;margin:25px 0 15px;text-transform:uppercase}@media (max-width:380px){.new-price{font-size:48px}.cta-button{font-size:18px;padding:18px}.headline h1{font-size:22px}}
     </style>
 </head>
 <body>
@@ -547,10 +52,11 @@
         ⚠️ ÚLTIMAS 23 UNIDADES COM 80% OFF! ACABA EM: <span id="urgencyTimer">29:47</span>
     </div>
 
-    <!-- VÍDEO SEM OVERLAY - OCUPA A TELA INTEIRA -->
+    <!-- VÍDEO SEM OVERLAY - COM LAZY LOAD -->
     <div class="video-container">
         <div class="video-wrapper">
-            <iframe src="https://player.vimeo.com/video/1158018382?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1" 
+            <iframe loading="lazy" 
+                    src="https://player.vimeo.com/video/1158018382?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1" 
                     frameborder="0" 
                     allow="autoplay; fullscreen; picture-in-picture"
                     title="BOMBA PATCH 2026 MOBILE">
@@ -667,7 +173,7 @@
             <div style="font-weight: bold;">⏰ ACABA EM:</div>
             <div class="timer" id="mainTimer">29:47</div>
             
-            <a href="https://pay.lowify.com.br/checkout?product_id=KvqSd6" class="cta-button" onclick="trackConversion()">
+            <a href="https://pay.lowify.com.br/checkout?product_id=KvqSd6" class="cta-button" onclick="trackConversion(event)">
                 QUERO MEU BOMBA PATCH AGORA!
             </a>
             
@@ -713,7 +219,7 @@
         </div>
 
         <!-- SEGUNDO CTA -->
-        <a href="https://pay.lowify.com.br/checkout?product_id=KvqSd6" class="cta-button" onclick="trackConversion()">
+        <a href="https://pay.lowify.com.br/checkout?product_id=KvqSd6" class="cta-button" onclick="trackConversion(event)">
             ⚡ ÚLTIMAS UNIDADES! COMPRAR AGORA! ⚡
         </a>
 
@@ -736,67 +242,15 @@
     </div>
 
     <script>
-        // CONTADORES
-        let timeLeft = 29 * 60 + 47;
-        let stock = 23;
-        let salesCount = 47;
+        // CONTADORES - MINIFICADO E OTIMIZADO
+        let timeLeft=29*60+47,stock=23,salesCount=47;
+        function updateCounters(){let e=Math.floor(timeLeft/60),t=timeLeft%60,o=`${e.toString().padStart(2,"0")}:${t.toString().padStart(2,"0")}`;document.getElementById("mainTimer").textContent=o,document.getElementById("urgencyTimer").textContent=o,Math.random()>.6&&stock>0&&(stock--,salesCount++,document.getElementById("stockCounter").textContent=salesCount,document.querySelector(".stock-counter div:last-child").innerHTML=`⚠️ APENAS ${stock} RESTANTES COM DESCONTO ⚠️`),timeLeft>0&&(timeLeft--,setTimeout(updateCounters,1e3))}updateCounters();
         
-        function updateCounters() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            document.getElementById('mainTimer').textContent = timeString;
-            document.getElementById('urgencyTimer').textContent = timeString;
-            
-            if (Math.random() > 0.6 && stock > 0) {
-                stock--;
-                salesCount++;
-                document.getElementById('stockCounter').textContent = salesCount;
-                document.querySelector('.stock-counter div:last-child').innerHTML = `⚠️ APENAS ${stock} RESTANTES COM DESCONTO ⚠️`;
-            }
-            
-            if (timeLeft > 0) {
-                timeLeft--;
-                setTimeout(updateCounters, 1000);
-            }
-        }
+        // FAQ TOGGLE - OTIMIZADO
+        function toggleFAQ(e){e.classList.toggle("active"),e.querySelector("span").textContent=e.classList.contains("active")?"−":"+"}
         
-        updateCounters();
-        
-        // FAQ TOGGLE
-        function toggleFAQ(element) {
-            element.classList.toggle('active');
-            const span = element.querySelector('span');
-            span.textContent = element.classList.contains('active') ? '−' : '+';
-        }
-        
-        // TRACKING
-        function trackConversion() {
-            // Evento de conversão específico do Google Ads
-            gtag('event', 'conversion', {
-                'send_to': 'AW-17962698816/9PkYCM_S0PwbEMCQpPVC',
-                'value': 9.90,
-                'currency': 'BRL',
-                'transaction_id': ''
-                // 'new_customer': true /* calculate dynamically, populate with true/false */,
-            });
-            
-            if (typeof utms !== 'undefined') {
-                utms.track('purchase_click', {
-                    product: 'bomba_patch_2026_mobile',
-                    price: 9.90,
-                    currency: 'BRL',
-                    gateway: 'lowfy'
-                });
-            }
-            
-            if (event && event.target) {
-                event.target.style.transform = 'translateY(4px)';
-                event.target.style.boxShadow = '0 4px 0 #8B0000';
-                event.target.innerHTML = '🚀 REDIRECIONANDO... 🚀';
-            }
-        }
+        // TRACKING - OTIMIZADO
+        function trackConversion(e){gtag("event","conversion",{send_to:"AW-17962698816/9PkYCM_S0PwbEMCQpPVC",value:9.9,currency:"BRL",transaction_id:""}),"undefined"!=typeof utms&&utms.track("purchase_click",{product:"bomba_patch_2026_mobile",price:9.9,currency:"BRL",gateway:"lowfy"}),e&&(e.target.style.transform="translateY(4px)",e.target.style.boxShadow="0 4px 0 #8B0000",e.target.innerHTML="🚀 REDIRECIONANDO... 🚀")}
     </script>
 </body>
 </html>
