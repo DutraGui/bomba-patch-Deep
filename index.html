@@ -13,14 +13,306 @@
     <link rel="dns-prefetch" href="https://cdn.utmify.com.br">
     <link rel="dns-prefetch" href="https://player.vimeo.com">
     
-    <!-- Google tag (gtag.js) - Carregamento assíncrono -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17962698816"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-17962698816');
-    </script>
+   <!-- MODAL PIX - ADICIONAR ANTES DO FECHAMENTO </body> -->
+<div id="pixModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; overflow-y: auto;">
+    <div style="background: #000; max-width: 500px; margin: 20px auto; padding: 25px; border: 4px solid #FFD700; border-radius: 20px; position: relative;">
+        
+        <button onclick="fecharPixModal()" style="position: absolute; top: 10px; right: 10px; background: #F00; color: #FFF; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; border: 2px solid #FFD700;">✗</button>
+        
+        <div style="text-align: center;">
+            <h3 style="color: #FFD700; font-size: 24px; margin-bottom: 10px;">🔥 BOMBA PATCH 2026 🔥</h3>
+            <div style="background: #F00; color: #FFF; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <div style="font-size: 32px; font-weight: 900;">R$ 9,90</div>
+                <div>APENAS HOJE COM 80% OFF!</div>
+            </div>
+        </div>
+
+        <!-- FORMULÁRIO - APENAS EMAIL E TELEFONE -->
+        <div id="formularioPix">
+            <div style="margin-bottom: 20px;">
+                <label style="color: #FFD700; display: block; margin-bottom: 5px;">📧 SEU MELHOR EMAIL *</label>
+                <input type="email" id="emailCliente" required style="width: 100%; padding: 15px; background: #111; border: 2px solid #FFD700; border-radius: 10px; color: #FFF; font-size: 16px;" placeholder="Digite seu email">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="color: #FFD700; display: block; margin-bottom: 5px;">📱 SEU WHATSAPP *</label>
+                <input type="tel" id="telefoneCliente" required style="width: 100%; padding: 15px; background: #111; border: 2px solid #FFD700; border-radius: 10px; color: #FFF; font-size: 16px;" placeholder="DDD + Número (só números)">
+            </div>
+            
+            <button onclick="gerarPix()" style="width: 100%; padding: 20px; background: #F00; color: #FFF; border: 3px solid #FFD700; border-radius: 50px; font-size: 22px; font-weight: 900; cursor: pointer; margin: 10px 0;">
+                💳 GERAR PIX PARA PAGAMENTO
+            </button>
+            
+            <div style="text-align: center; color: #888; font-size: 12px;">
+                🔒 Seus dados estão seguros<br>
+                Pagamento processado por VenoPayments
+            </div>
+        </div>
+
+        <!-- ÁREA DO PIX (APARECE DEPOIS) -->
+        <div id="areaPix" style="display: none; text-align: center;">
+            <h4 style="color: #FFD700; margin-bottom: 15px;">✅ PIX GERADO COM SUCESSO!</h4>
+            
+            <!-- QR CODE -->
+            <div id="qrcodeContainer" style="background: #FFF; padding: 20px; border-radius: 20px; margin-bottom: 20px; display: flex; justify-content: center;">
+                <div id="qrcode"></div>
+            </div>
+            
+            <!-- CÓDIGO COPIA E COLA -->
+            <div style="background: #111; border: 2px dashed #FFD700; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <div style="color: #888; font-size: 12px; margin-bottom: 5px;">Clique para copiar o código:</div>
+                <div id="pixCopiaCola" style="color: #FFD700; font-size: 14px; word-break: break-all; cursor: pointer; background: #000; padding: 10px; border-radius: 5px;" onclick="copiarPix()"></div>
+            </div>
+            
+            <button onclick="copiarPix()" style="background: #006400; color: #FFF; border: 3px solid #FFD700; padding: 15px; border-radius: 30px; font-size: 18px; font-weight: bold; width: 100%; margin-bottom: 15px; cursor: pointer;">
+                📋 COPIAR CÓDIGO PIX
+            </button>
+            
+            <div id="statusPagamento" style="background: #8B0000; color: #FFF; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                ⏳ Aguardando pagamento...
+            </div>
+            
+            <div style="color: #888; font-size: 12px; margin-top: 15px;">
+                ⚡ O QR Code expira em 1 hora<br>
+                Após o pagamento, você será redirecionado
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BIBLIOTECA QR CODE -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+
+<script>
+// CONFIGURAÇÕES
+const API_BACKEND = 'https://SEU-BACKEND-AQUI.onrender.com'; // <-- TROQUE PELA URL DO RENDER
+
+let pixAtual = null;
+let intervaloStatus = null;
+
+// FUNÇÃO PARA ABRIR MODAL (CHAMADA PELO BOTÃO)
+function abrirPixModal() {
+    document.getElementById('pixModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Resetar formulário
+    document.getElementById('formularioPix').style.display = 'block';
+    document.getElementById('areaPix').style.display = 'none';
+    document.getElementById('emailCliente').value = '';
+    document.getElementById('telefoneCliente').value = '';
+    
+    // Tracking
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'abriu_modal_pix', {
+            'event_category': 'checkout',
+            'event_label': 'bomba_patch'
+        });
+    }
+}
+
+function fecharPixModal() {
+    document.getElementById('pixModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    
+    // Parar verificação de status
+    if (intervaloStatus) {
+        clearInterval(intervaloStatus);
+        intervaloStatus = null;
+    }
+}
+
+// GERAR PIX (APENAS EMAIL E TELEFONE)
+async function gerarPix() {
+    const email = document.getElementById('emailCliente').value.trim();
+    const telefone = document.getElementById('telefoneCliente').value.trim();
+    
+    // Validação básica
+    if (!email || !telefone) {
+        alert('Por favor, preencha email e telefone!');
+        return;
+    }
+    
+    if (!email.includes('@') || !email.includes('.')) {
+        alert('Digite um email válido!');
+        return;
+    }
+    
+    if (telefone.length < 10 || telefone.length > 11) {
+        alert('Digite um telefone válido com DDD (apenas números)');
+        return;
+    }
+    
+    // Mostrar loading
+    const botao = event.target;
+    const textoOriginal = botao.innerHTML;
+    botao.innerHTML = '⏳ GERANDO PIX...';
+    botao.disabled = true;
+    
+    try {
+        // Chamar nosso backend
+        const response = await fetch(`${API_BACKEND}/api/criar-pix`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                telefone: telefone
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.message || 'Erro ao gerar Pix');
+        }
+        
+        console.log('Pix gerado:', data);
+        
+        // Salvar ID do Pix
+        pixAtual = data.pix_id;
+        
+        // Gerar QR Code
+        const qrcodeDiv = document.getElementById('qrcode');
+        qrcodeDiv.innerHTML = '';
+        
+        await QRCode.toCanvas(qrcodeDiv, data.qr_code, {
+            width: 250,
+            margin: 2,
+            color: {
+                dark: '#000000',
+                light: '#FFFFFF'
+            }
+        });
+        
+        // Mostrar código copia e cola
+        document.getElementById('pixCopiaCola').textContent = data.pix_copy_paste;
+        document.getElementById('pixCopiaCola').setAttribute('data-copia', data.pix_copy_paste);
+        
+        // Esconder formulário, mostrar área Pix
+        document.getElementById('formularioPix').style.display = 'none';
+        document.getElementById('areaPix').style.display = 'block';
+        
+        // Iniciar verificação de status
+        iniciarVerificacaoStatus(data.pix_id);
+        
+        // Tracking
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'pix_gerado', {
+                'event_category': 'checkout',
+                'event_label': 'bomba_patch',
+                'value': 9.90
+            });
+        }
+        
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao gerar Pix. Tente novamente em instantes.');
+    } finally {
+        botao.innerHTML = textoOriginal;
+        botao.disabled = false;
+    }
+}
+
+// VERIFICAR STATUS DO PAGAMENTO
+function iniciarVerificacaoStatus(pixId) {
+    if (intervaloStatus) {
+        clearInterval(intervaloStatus);
+    }
+    
+    intervaloStatus = setInterval(async () => {
+        try {
+            const response = await fetch(`${API_BACKEND}/api/status/${pixId}`);
+            const data = await response.json();
+            
+            if (data.status === 'paid') {
+                // Pagamento confirmado!
+                clearInterval(intervaloStatus);
+                
+                document.getElementById('statusPagamento').innerHTML = '✅ PAGAMENTO CONFIRMADO! REDIRECIONANDO...';
+                document.getElementById('statusPagamento').style.background = '#006400';
+                
+                // Tracking de conversão
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-17962698816/9PkYCM_S0PwbEMCQpPVC',
+                        'value': 9.9,
+                        'currency': 'BRL'
+                    });
+                }
+                
+                // Redirecionar para página de obrigado (criar depois)
+                setTimeout(() => {
+                    window.location.href = 'https://bomba-patch-deep.vercel.app/obrigado.html';
+                }, 3000);
+            }
+        } catch (error) {
+            console.error('Erro ao verificar status:', error);
+        }
+    }, 5000); // Verificar a cada 5 segundos
+}
+
+// COPIAR CÓDIGO PIX
+function copiarPix() {
+    const codigo = document.getElementById('pixCopiaCola').getAttribute('data-copia') || 
+                   document.getElementById('pixCopiaCola').textContent;
+    
+    navigator.clipboard.writeText(codigo).then(() => {
+        alert('✅ Código Pix copiado! Agora é só pagar no app do seu banco.');
+    }).catch(() => {
+        alert('Clique com botão direito e selecione "Copiar"');
+    });
+}
+
+// MÁSCARA PARA TELEFONE (enquanto digita)
+document.addEventListener('DOMContentLoaded', function() {
+    const telefoneInput = document.getElementById('telefoneCliente');
+    if (telefoneInput) {
+        telefoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            e.target.value = value;
+        });
+    }
+    
+    // Modificar botões de compra para abrir modal
+    document.querySelectorAll('.cta-button, a[href*="lowify"]').forEach(botao => {
+        botao.addEventListener('click', function(e) {
+            e.preventDefault();
+            abrirPixModal();
+        });
+    });
+});
+</script>
+
+<style>
+/* ESTILOS DO MODAL */
+#pixModal input:focus {
+    outline: 3px solid #F00;
+}
+
+#pixModal button:hover {
+    transform: scale(1.02);
+    transition: 0.2s;
+}
+
+#qrcode canvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Animações */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+#statusPagamento {
+    animation: pulse 2s infinite;
+}
+</style>
     
     <!-- UTMify Tracking Script - Defer para não bloquear renderização -->
     <script
