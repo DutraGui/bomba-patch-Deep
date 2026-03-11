@@ -40,7 +40,11 @@ app.post('/api/criar-pix', async (req, res) => {
 
         console.log(`📝 Criando Pix para: ${email} | Telefone: ${telefone}`);
 
-        // Chamar API da Veno
+        // CORREÇÃO: Usar CPF fixo 111.111.111-11 (válido para testes)
+        // A Veno exige document, então usamos um CPF genérico
+        const cpfGenerico = "11111111111"; // CPF válido para testes
+        
+        // Chamar API da Veno com os campos corrigidos
         const response = await fetch('https://beta.venopayments.com/api/v1/pix', {
             method: 'POST',
             headers: {
@@ -53,9 +57,9 @@ app.post('/api/criar-pix', async (req, res) => {
                 external_id: external_id,
                 description: 'Bomba Patch 2026 Mobile',
                 payer: {
-                    email: email,
-                    phone: telefone
-                    // SEM CPF - conforme solicitado
+                    name: telefone,        // Telefone vai no campo name
+                    email: email,           // Email do cliente
+                    document: cpfGenerico   // CPF genérico (campo obrigatório)
                 },
                 // UTMs serão capturadas automaticamente pela Veno
             })
@@ -82,6 +86,8 @@ app.post('/api/criar-pix', async (req, res) => {
         });
 
         console.log(`✅ Pix criado: ${data.id} para ${email}`);
+        console.log(`📞 Telefone (campo name): ${telefone}`);
+        console.log(`🆔 CPF usado: ${cpfGenerico}`);
 
         // Retornar apenas o necessário para o frontend
         res.json({
@@ -188,9 +194,10 @@ app.listen(PORT, () => {
     ║  🔥 SERVIDOR PIX INICIADO COM SUCESSO 🔥 ║
     ╠══════════════════════════════════════════╣
     ║  ➜ Criar Pix: /api/criar-pix            ║
-    ║  ➜ Webhook:   /api/webhook/veno          ║
-    ║  ➜ Status:    /api/status/:id            ║
+    ║  ➜ Webhook:   /api/webhook/veno         ║
+    ║  ➜ Status:    /api/status/:id           ║
     ║  ➜ Porta:     ${PORT}                       ║
+    ║  ➜ CPF usado: 111.111.111-11 (fixo)     ║
     ╚══════════════════════════════════════════╝
     `);
 });
